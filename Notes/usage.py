@@ -3,7 +3,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_blobs
 
+##### LinearRegression
 # Generate synthetic data
 np.random.seed(0)
 X = 2 * np.random.rand(100, 1)
@@ -25,4 +28,22 @@ plt.plot(X_test, y_pred, color='red', linewidth=2)
 plt.xlabel("X")
 plt.ylabel("y")
 plt.title("Linear Regression")
+plt.show()
+
+##### KMeans
+# Generate synthetic data
+n_samples = 300
+X, _ = make_blobs(n_samples=n_samples, centers=3, random_state=42)
+
+# Create and fit the K-means model
+kmeans = KMeans(n_clusters=3, random_state=42)
+kmeans.fit(X)
+
+# Plot the clustered data
+plt.scatter(X[:, 0], X[:, 1], c=kmeans.labels_, cmap='viridis')
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s=300, c='red', label='Centroids')
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2")
+plt.title("K-Means Clustering")
+plt.legend()
 plt.show()
