@@ -5,6 +5,9 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.cluster import KMeans
 from sklearn.datasets import make_blobs
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import load_iris
+from sklearn.metrics import accuracy_score
 
 ##### LinearRegression
 # Generate synthetic data
@@ -47,3 +50,32 @@ plt.ylabel("Feature 2")
 plt.title("K-Means Clustering")
 plt.legend()
 plt.show()
+
+##### RandomForest
+
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Split data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create and train the Random Forest classifier
+clf = RandomForestClassifier(n_estimators=100, random_state=42)
+clf.fit(X_train, y_train)
+
+# Make predictions
+y_pred = clf.predict(X_test)
+
+# Calculate accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy}")
+
+# Feature importance
+importances = clf.feature_importances_
+plt.barh(range(X.shape[1]), importances, tick_label=iris.feature_names)
+plt.xlabel("Feature Importance")
+plt.title("Random Forest Feature Importance")
+plt.show()
+
