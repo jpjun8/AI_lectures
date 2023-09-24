@@ -1,8 +1,8 @@
 import numpy as np
 
-# 1D array from 0 to 9
+# 0부터 9까지 1차원 배열
 
-# 3x3 array of all True
+# 3x3 True로 꽉 찬 배열
 
 # arr에서 홀수만 출력
 arr = np.arange(10)
