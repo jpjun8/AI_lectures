@@ -35,6 +35,8 @@ print(np.vstack((a, b)))
 a = np.arange(10).reshape(2, -1)
 b = np.repeat(1, 10).reshape(2, -1)
 
+print(np.hstack((a, b)))
+
 # array([1, 1, 1, 2, 2, 2, 3, 3, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]) 출력
 a = np.array([1, 2, 3])
 print(np.r_[np.repeat(a, 3), np.tile(a, 3)])
@@ -45,7 +47,7 @@ b = np.array([7, 2, 10, 2, 7, 4, 9, 4, 9, 8])
 
 print(np.intersect1d(a, b))
 
-# a에서 b에도 있는 요소 모두 제거
+# a에만 있는 요소 출력
 a = np.array([1, 2, 3, 4, 5])
 b = np.array([5, 6, 7, 8, 9])
 
@@ -101,7 +103,7 @@ rand_arr = np.random.uniform(5, 10, size=(5, 3))
 print(rand_arr)
 
 # rand_arr 값들 소수점 3자리까지만 출력
-rand_arr = np.random.random((5, 3))
+rand_arr = np.random.random((5, 3)) # 0~1
 np.set_printoptions(precision=3)
 print(rand_arr)
 
@@ -119,19 +121,21 @@ np.set_printoptions(threshold=6)
 print(a)
 
 # iris 데이터 그대로 가져오기
-# url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
-# iris = np.genfromtxt(url, delimiter=',', dtype='object')
-# names = ('sepallength', 'sepalwidth', 'petallength', 'petalwidth', 'species')
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+iris = np.genfromtxt(url, delimiter=',', dtype='object')
+names = ('sepallength', 'sepalwidth', 'petallength', 'petalwidth', 'species')
 
-# print(iris[:3])
+print(iris[:3])
 
 # iris에서 species 열만 추출
-# species = np.array([row[4] for row in iris])
-# print(species[:5])
+species = np.array([row[4] for row in iris])
+print(species[:5])
 
 # species 열 빼고 2차원 배열로 바꾸기 (iris_2d)
-# iris_2d = np.genfromtxt(url, delimiter=',', dtype='float', usecols=[0, 1, 2, 3])
-# print(iris_2d[:4])
+iris_2d = np.genfromtxt(url, delimiter=',', dtype='float', usecols=[0, 1, 2, 3])
+print(iris_2d[:4])
+
+##### 데이터 전처리 (preprocessing)
 
 # iris의 sepallength 열의 mean, median, std 구하기
 sepallength = np.genfromtxt(url, delimiter=',', dtype='float', usecols=[0])
